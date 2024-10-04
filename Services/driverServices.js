@@ -1,13 +1,15 @@
 const pool = require("../Config/dbconfig")
 const connect = require("../Config/dbconfig")
 const checkTable = async () => {
-    await connect.query(`Create Table if not exists category(
-        id INT AUTO_INCREMENT primary key,
-        name Varchar(50) not null);`);
+    await connect.query(`
+    Create Table if not exists driver(
+        user_id int primary key,
+        experince int not null,
+        foreign key (user_id) refrences user(id);`);
 }
-const createCategory = async(req,res) => {
+const createDriver = async(req,res) => {
     await checkTable();
-    pool.query(`Insert into category(name) values(?)`,[req.category_name],
+    pool.query(`Insert into driver(user_id,experince) values(?,?)`,[req.user_id,req.experince],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -15,8 +17,8 @@ const createCategory = async(req,res) => {
         return res.status(200).send(results)
     })
 }
-const updateCategory = (req,res) => {
-    pool.query(`Update category set name = ? where id=?`,[req.category_name,req.category_id],
+const updateDriver = (req,res) => {
+    pool.query(`Update driver set experince = ? where user_id=?`,[req.experince, req.user_id,],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -24,9 +26,9 @@ const updateCategory = (req,res) => {
         return res.status(200).send(results)
     })
 }
-const deleteCategory = (req,res) => {
+const deleteDriver = (req,res) => {
     checkTable();
-    pool.query(`Delete from category where id = ?`,[req.category_id],
+    pool.query(`Delete from driver where user_id = ?`,[req.user_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -34,9 +36,9 @@ const deleteCategory = (req,res) => {
         return res.status(200).send(results)
     })
 }
-const reviewCategory = (req,res) => {
+const reviewDriver = (req,res) => {
     checkTable();
-    pool.query(`Select from category where id=?`,[req.category_id],
+    pool.query(`Select from driver where user_id=?`,[req.user_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -46,8 +48,8 @@ const reviewCategory = (req,res) => {
 }
 
 module.exports = {
-    createCategory,
-    updateCategory,
-    reviewCategory,
-    deleteCategory
+  createDriver,
+  updateDriver,
+  reviewDriver,
+  deleteDriver
 }

@@ -1,13 +1,13 @@
-const categorycontroller = require("./Controllers/categoryController")
+const Specialtycontroller = require("./Controllers/SpecialtyController")
 const rolescontroller = require("./Controllers/rolesController")
 const usercontroller = require("./Controllers/userController")
 const router = require("express").Router()
 
-//Category
-router.post("/CreateCategory",categorycontroller.createCategory)
-router.post("/UpdateCategory",categorycontroller.updateCategory)
-router.post("/ReviewCategory",categorycontroller.reviewCategory)
-router.post("/DeleteCategory",categorycontroller.deleteCategory)
+//Specialty
+router.post("/CreateSpecialty",Specialtycontroller.createSpecialty)
+router.post("/UpdateSpecialty",Specialtycontroller.updateSpecialty)
+router.post("/ReviewSpecialty",Specialtycontroller.reviewSpecialty)
+router.post("/DeleteSpecialty",Specialtycontroller.deleteSpecialty)
 
 //User
 router.post("/CreateUser",usercontroller.createUser)

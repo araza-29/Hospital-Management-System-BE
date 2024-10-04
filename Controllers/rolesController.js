@@ -3,25 +3,25 @@ const createRoles = (req,res) => {
     const roleInfo = {
         role: req.body.role
     }
-    service.createCategory(categoryInfo,res)
+    service.createRoles(SpecialtyInfo,res)
 }
 const updateRoles = (req,res) => {
-    const categoryInfo = {
+    const SpecialtyInfo = {
         role: req.body.role
     }
-    service.updateCategory(categoryInfo,res)
+    service.updateRoles(SpecialtyInfo,res)
 }
 const deleteRoles = (req,res) => {
-    const categoryInfo = {
+    const SpecialtyInfo = {
         role: req.body.role
     }
-    service.deleteCategory(categoryInfo,res)
+    service.deleteRoles(SpecialtyInfo,res)
 }
 const reviewRoles = (req,res) => {
-    const categoryInfo = {
+    const SpecialtyInfo = {
         role: req.body.role
     }
-    service.reviewCategory(categoryInfo,res)
+    service.reviewRoles(SpecialtyInfo,res)
 }
 
 module.exports = {

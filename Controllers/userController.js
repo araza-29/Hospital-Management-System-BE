@@ -10,7 +10,7 @@
             gender: req.body.user_gender,
             role_id: req.body.user_role_id,
         }
-        service.createCategory(categoryInfo,res)
+        service.createUser(SpecialtyInfo,res)
     }
     const updateUser = (req,res) => {
         const userInfo = {
@@ -23,19 +23,19 @@
             gender: req.body.user_gender,
             role_id: req.body.user_role_id,
         }
-        service.updateCategory(categoryInfo,res)
+        service.updateUser(SpecialtyInfo,res)
     }
     const deleteUser = (req,res) => {
         const userInfo = {
             user_id: req.body.user_id
         }
-        service.deleteCategory(categoryInfo,res)
+        service.deleteUser(SpecialtyInfo,res)
     }
     const reviewUser = (req,res) => {
-        const categoryInfo = {
+        const SpecialtyInfo = {
             user_id: req.body.user_id
         }
-        service.reviewCategory(categoryInfo,res)
+        service.reviewUser(SpecialtyInfo,res)
     }
     
 module.exports = {
