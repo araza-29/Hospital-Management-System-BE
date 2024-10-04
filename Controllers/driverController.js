@@ -27,8 +27,8 @@ const reviewDriver = (req,res) => {
 }
 
 module.exports = {
-    createDoctor,
-    updateDoctor,
-    deleteDoctor,
-    reviewDoctor
+    createDriver,
+    updateDriver,
+    deleteDriver,
+    reviewDriver
 }
