@@ -1,9 +1,11 @@
-module.exports = {
-    HOST:"localhost", 
-    PORT:"4000",
-    USER:"root",
-    PASSWORD:"",
-    DB:"Hospital",
-    dialect:"mysql",
-    CONNECTIONLIMIT:10
-}
+const {createPool} = require("mysql")
+require('dotenv').config();
+const pool = createPool({
+    host: process.env.HOST,
+    password: process.env.PASSWORD,
+    user: process.env.USER,
+    port: process.env.PORT,
+    database: process.env.DATABASE
+})
+
+module.exports = pool
