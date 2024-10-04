@@ -2,7 +2,7 @@ const pool = require("../Config/dbconfig")
 const connect = require("../Config/dbconfig")
 const checkTable = async () => {
     await connect.query(`
-    Create Table if not exists create table user(
+    Create Table if not exists user(
         id int AUTO_INCREMENT primary key,
         first_name varchar(20) not null,
         last_name varchar(20) not null,
