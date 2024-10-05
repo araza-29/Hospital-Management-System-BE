@@ -20,7 +20,7 @@ const deleteDriver = (req,res) => {
     service.deleteDriver(driverInfo,res)
 }
 const reviewDriver = (req,res) => {
-    const SpecialtyInfo = {
+    const driverInfo = {
         user_id: req.body.user_id
     }
     service.reviewDriver(driverInfo,res)
