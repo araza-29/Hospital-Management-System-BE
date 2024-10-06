@@ -5,7 +5,7 @@ const checkTable = async () => {
     Create Table if not exists driver(
         user_id int primary key,
         experince int not null,
-        foreign key (user_id) refrences user(id);`);
+        foreign key (user_id) refrences user(id));`);
 }
 const createDriver = async(req,res) => {
     await checkTable();

@@ -11,8 +11,8 @@ const checkTable = async () => {
         gender char(1) not null constraint check_gender check (gender in ('M','F')),
         address varchar(50),
         phone varchar(20) not null,
-        role_id int not null),
-        foreign key (role_id) refrences roles(id);`);
+        role_id int not null,
+        foreign key (role_id) refrences roles(id));`);
 }
 const createUser = async(req,res) => {
     await checkTable();

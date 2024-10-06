@@ -17,13 +17,13 @@ const deletelabAttendant = (req,res) => {
     const labAttendantInfo = {
         user_id: req.body.user_id
     }
-    service.deletelabAttendant(driverInfo,res)
+    service.deletelabAttendant(labAttendantInfo,res)
 }
 const reviewlabAttendant = (req,res) => {
-    const driverInfo = {
+    const labAttendantInfo = {
         user_id: req.body.user_id
     }
-    service.reviewlabAttendant(driverInfo,res)
+    service.reviewlabAttendant(labAttendantInfo,res)
 }
 
 module.exports = {
