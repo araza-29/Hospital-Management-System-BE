@@ -40,7 +40,7 @@ const deleteStock = (req,res) => {
 }
 const reviewStock = (req,res) => {
     checkTable();
-    pool.query(`Select from stock where id=?`,[req.stock_id],
+    pool.query(`Select m.name, m.dose from stock s join medicine m on s.medicine_id = m.id where stock = 0`,
     (error,results)=> {
         if(error){
             res.status(500).send(error)

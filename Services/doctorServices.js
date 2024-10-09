@@ -49,10 +49,21 @@ const reviewDoctor = (req,res) => {
         return res.status(200).send(results)
     })
 }
+const reviewDoctorBySpecialty = (req,res) => {
+    checkTable();
+    pool.query(`Select from doctor d join specialty s on d.specialty_id=s.id where s.name = ?`,[req.specialty_name],
+    (error,results)=> {
+        if(error){
+            res.status(500).send(error)
+        }
+        return res.status(200).send(results)
+    })
+}
 
 module.exports = {
   createDoctor,
   updateDoctor,
   reviewDoctor,
-  deleteDoctor
+  deleteDoctor,
+  reviewDoctorBySpecialty
 }

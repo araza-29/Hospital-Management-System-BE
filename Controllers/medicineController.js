@@ -24,7 +24,8 @@
     }
     const reviewMedicine = (req,res) => {
         const MedicineInfo = {
-            user_id: req.body.medicine_id
+            medicine_name: req.body.medicine_name,
+            medicine_dose: req.body.medicine_dose
         }
         service.reviewMedicine(MedicineInfo,res)
     }

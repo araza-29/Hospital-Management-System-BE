@@ -28,9 +28,17 @@ const reviewDoctor = (req,res) => {
     service.reviewSpecialty(SpecialtyInfo,res)
 }
 
+const reviewDoctorBySpecialty = (req,res) => {
+    const SpecialtyInfo = {
+        specialty_name: req.body.specialty_name
+    }
+    service.reviewSpecialtyBySpecialty(SpecialtyInfo,res)
+}
+
 module.exports = {
     createDoctor,
     updateDoctor,
     deleteDoctor,
-    reviewDoctor
+    reviewDoctor,
+    reviewDoctorBySpecialty
 }

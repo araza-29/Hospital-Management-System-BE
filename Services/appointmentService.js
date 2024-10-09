@@ -42,7 +42,29 @@ const deleteAppointment = (req,res) => {
 }
 const reviewAppointment = (req,res) => {
     checkTable();
-    pool.query(`Select from appointment where id=?`,[req.appointment_id_id],
+    pool.query(`Select from appointment where id=?`,[req.appointment_id],
+    (error,results)=> {
+        if(error){
+            res.status(500).send(error)
+        }
+        return res.status(200).send(results)
+    })
+}
+
+const reviewAppointmentByUserID = (req,res) => {
+    checkTable();
+    pool.query(`Select from appointment where user_id=?`,[req.user_id],
+    (error,results)=> {
+        if(error){
+            res.status(500).send(error)
+        }
+        return res.status(200).send(results)
+    })
+}
+
+const reviewAppointmentByDoctorID = (req,res) => {
+    checkTable();
+    pool.query(`Select from appointment where doctor_id=?`,[req.doctor_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -55,5 +77,7 @@ module.exports = {
   createAppointment,
   updateAppointment,
   reviewAppointment,
-  deleteAppointment
+  deleteAppointment,
+  reviewAppointmentByUserID,
+  reviewAppointmentByDoctorID
 }
