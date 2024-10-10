@@ -42,7 +42,7 @@ const deleteAppointment = (req,res) => {
 }
 const reviewAppointment = (req,res) => {
     checkTable();
-    pool.query(`Select from appointment where id=?`,[req.appointment_id],
+    pool.query(`Select * from appointment where id=?`,[req.appointment_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -53,7 +53,7 @@ const reviewAppointment = (req,res) => {
 
 const reviewAppointmentByUserID = (req,res) => {
     checkTable();
-    pool.query(`Select from appointment where user_id=?`,[req.user_id],
+    pool.query(`Select * from appointment where user_id=?`,[req.user_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -64,7 +64,7 @@ const reviewAppointmentByUserID = (req,res) => {
 
 const reviewAppointmentByDoctorID = (req,res) => {
     checkTable();
-    pool.query(`Select from appointment where doctor_id=?`,[req.doctor_id],
+    pool.query(`Select * from appointment where doctor_id=?`,[req.doctor_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)

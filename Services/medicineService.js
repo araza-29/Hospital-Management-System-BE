@@ -38,7 +38,7 @@ const deleteMedicine = (req,res) => {
 }
 const reviewMedicine = (req,res) => {
     checkTable();
-    pool.query(`Select from medicine where name=? and dose =?`,[req.medicine_name,req.medicine_dose],
+    pool.query(`Select * from medicine where name=? and dose =?`,[req.medicine_name,req.medicine_dose],
     (error,results)=> {
         if(error){
             res.status(500).send(error)

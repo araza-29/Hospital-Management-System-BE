@@ -7,7 +7,8 @@ const checkTable = async () => {
         first_name varchar(20) not null,
         last_name varchar(20) not null,
         age int not null constraint check_age check(age>=0),
-        email varchar(30),
+        email varchar(30) not null,
+        password varchar(50) not null
         gender char(1) not null constraint check_gender check (gender in ('M','F')),
         address varchar(50),
         phone varchar(20) not null,
@@ -25,7 +26,7 @@ const createUser = async(req,res) => {
     })
 }
 const updateUser = (req,res) => {
-    pool.query(`Update user set first_name = ?, last_name = ?, age = ?, email= ? , gender = ?, address = ?, phone = ?, role_id = ? where id=?`,[req.first_name,req.last_name,req.age,req.email,req.gender,req.address,req.phone,req.role_id],
+    pool.query(`Update user set first_name = ?, last_name = ?, age = ?, email= ? , password = ?, gender = ?, address = ?, phone = ?, role_id = ? where id=?`,[req.first_name,req.last_name,req.age,req.email,req.gender,req.address,req.phone,req.role_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -45,7 +46,17 @@ const deleteUser = (req,res) => {
 }
 const reviewUser = (req,res) => {
     checkTable();
-    pool.query(`Select from user where id=?`,[req.user_id],
+    pool.query(`Select * from user where id=?`,[req.user_id],
+    (error,results)=> {
+        if(error){
+            res.status(500).send(error)
+        }
+        return res.status(200).send(results)
+    })
+}
+const Login = (req,res) => {
+    checkTable();
+    pool.query(`Select * from user where email = ? or password = ?`,[req.email, req.password],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -58,5 +69,6 @@ module.exports = {
   createUser,
   updateUser,
   reviewUser,
-  deleteUser
+  deleteUser,
+  Login
 }

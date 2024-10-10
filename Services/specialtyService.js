@@ -36,7 +36,7 @@ const deleteSpecialty = (req,res) => {
 }
 const reviewSpecialty = (req,res) => {
     checkTable();
-    pool.query(`Select from Specialty where id=?`,[req.Specialty_id],
+    pool.query(`Select * from Specialty where id=?`,[req.Specialty_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)

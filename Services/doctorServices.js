@@ -41,7 +41,7 @@ const deleteDoctor = (req,res) => {
 }
 const reviewDoctor = (req,res) => {
     checkTable();
-    pool.query(`Select from doctor where user_id=?`,[req.user_id],
+    pool.query(`Select * from doctor where user_id=?`,[req.user_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -51,7 +51,7 @@ const reviewDoctor = (req,res) => {
 }
 const reviewDoctorBySpecialty = (req,res) => {
     checkTable();
-    pool.query(`Select from doctor d join specialty s on d.specialty_id=s.id where s.name = ?`,[req.specialty_name],
+    pool.query(`Select * from doctor d join specialty s on d.specialty_id=s.id where s.name = ?`,[req.specialty_name],
     (error,results)=> {
         if(error){
             res.status(500).send(error)

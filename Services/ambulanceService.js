@@ -2,13 +2,15 @@ const pool = require("../Config/dbconfig")
 const connect = require("../Config/dbconfig")
 const checkTable = async () => {
     await connect.query(`
-    Create Table if not exists roles(
+    Create Table if not exists ambulance(
         id int AUTO_INCREMENT primary key,
-        role varchar(50) not null`);
+        driver_id varchar(20) not null,
+        location varchar(50) not null,
+        foreign key (driver_id) refrences driver(id);`);
 }
-const createRoles = async(req,res) => {
+const createAmbulance = async(req,res) => {
     await checkTable();
-    pool.query(`Insert into roles(role) values(?)`,[req.role],
+    pool.query(`Insert into ambulance(driver_id,location) values(?,?,)`,[req.driver_id,req.location,],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -16,18 +18,9 @@ const createRoles = async(req,res) => {
         return res.status(200).send(results)
     })
 }
-const updateRoles = (req,res) => {
-    pool.query(`Update roles set role = ? where id=?`,[req.role,req.roles_id],
-    (error,results)=> {
-        if(error){
-            res.status(500).send(error)
-        }
-        return res.status(200).send(results)
-    })
-}
-const deleteRoles = (req,res) => {
+const updateAmbulance = (req,res) => {
     checkTable();
-    pool.query(`Delete from roles where id = ?`,[req.roles_id],
+    pool.query(`Update ambulance set driver_id = ?, location = ? where id=?`,[req.driver_id,req.location,req.ambulance_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -35,9 +28,19 @@ const deleteRoles = (req,res) => {
         return res.status(200).send(results)
     })
 }
-const reviewRoles = (req,res) => {
+const deleteAmbulance = (req,res) => {
     checkTable();
-    pool.query(`Select * from roles where id=?`,[req.roles_id],
+    pool.query(`Delete from ambulance where id = ?`,[req.ambulance_id],
+    (error,results)=> {
+        if(error){
+            res.status(500).send(error)
+        }
+        return res.status(200).send(results)
+    })
+}
+const reviewAmbulance = (req,res) => {
+    checkTable();
+    pool.query(`Select * from ambulance where id=?`,[req.ambulance_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -47,8 +50,8 @@ const reviewRoles = (req,res) => {
 }
 
 module.exports = {
-  createRoles,
-  updateRoles,
-  reviewRoles,
-  deleteRoles
+  createAmbulance,
+  updateAmbulance,
+  reviewAmbulance,
+  deleteAmbulance
 }

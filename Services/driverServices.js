@@ -38,7 +38,7 @@ const deleteDriver = (req,res) => {
 }
 const reviewDriver = (req,res) => {
     checkTable();
-    pool.query(`Select from driver where user_id=?`,[req.user_id],
+    pool.query(`Select * from driver where user_id=?`,[req.user_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)

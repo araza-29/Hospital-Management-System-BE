@@ -37,7 +37,7 @@ const deletelabAttendant = (req,res) => {
 }
 const reviewlabAttendant = (req,res) => {
     checkTable();
-    pool.query(`Select from lab_attendant where id=?`,[req.user_id],
+    pool.query(`Select * from lab_attendant where id=?`,[req.user_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
