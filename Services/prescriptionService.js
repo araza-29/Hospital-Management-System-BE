@@ -3,14 +3,12 @@ const connect = require("../Config/dbconfig")
 const checkTable = async () => {
     await connect.query(`Create Table if not exists prescription(
         id INT AUTO_INCREMENT primary key,
-        doctor_id INT not null,
-        user_id INT not null,
-        foreign key doctor_id refrences doctor(id),
-        foreign key user_id refrences user(id));`);
+        appointment_id INT not null,
+        foreign key appointment_id refrences appointment(id));`);
 }
 const createPrescription = async(req,res) => {
     await checkTable();
-    pool.query(`Insert into Prescription(doctor_id,user_id) values(?,?)`,[req.doctor_id, req.user_id],
+    pool.query(`Insert into Prescription(appointment_id) values(?)`,[req.doctor_id, req.user_id, req.appointment_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -19,7 +17,7 @@ const createPrescription = async(req,res) => {
     })
 }
 const updatePrescription = (req,res) => {
-    pool.query(`Update prescription set doctor_id = ?, user_id = ? where id=?`,[req.doctor_id, req.user_id, req.Prescription_id],
+    pool.query(`Update prescription set appointment_id where id=?`,[req.appointment_id, req.Prescription_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -39,7 +37,7 @@ const deletePrescription = (req,res) => {
 }
 const reviewPrescriptionByUserID = (req,res) => {
     checkTable();
-    pool.query(`Select * from prescription where user_id = ?`,[req.user_id],
+    pool.query(`Select * from prescription p join appointment a on p.appointment_id = a.id where a.user_id = ?`,[req.user_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -49,7 +47,7 @@ const reviewPrescriptionByUserID = (req,res) => {
 }
 const reviewPrescriptionByDoctorID = (req,res) => {
     checkTable();
-    pool.query(`Select * from prescription where doctor_id = ?`,[req.doctor_id],
+    pool.query(`Select * from prescription p join appointment a on p.appointment_id = a.id where a.doctor_id = ?`,[req.doctor_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
