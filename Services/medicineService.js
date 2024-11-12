@@ -5,7 +5,9 @@ const checkTable = async () => {
         id INT AUTO_INCREMENT primary key,
         name Varchar(50) not null,
         price INT not null,
-        dose FLOAT not null);`);
+        dose FLOAT not null,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createMedicine = async(req,res) => {
     await checkTable();

@@ -8,7 +8,9 @@ const checkTable = async () => {
         experince int not null,
         specialty_id int not null,
         foriegn key (specialty_id) refrences user(id),
-        foreign key (user_id) refrences user(id));`);
+        foreign key (user_id) refrences user(id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createDoctor = async(req,res) => {
     await checkTable();

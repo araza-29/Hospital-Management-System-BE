@@ -7,7 +7,9 @@ const checkTable = async () => {
         medicine_id Int not null
         stock Int not null,
         foreign key (inventory_id) refrences inventory(id),
-        foreign key (medicine_id) refrences medicine(id));`);
+        foreign key (medicine_id) refrences medicine(id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createStock = async(req,res) => {
     await checkTable();

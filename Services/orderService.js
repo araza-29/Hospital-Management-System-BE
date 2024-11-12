@@ -6,7 +6,9 @@ const checkTable = async () => {
         prescription_id INT not null,
         delivery_time DateTime not null,
         price INT not null,
-        foreign key prescription_id refrences prescription(id));`);
+        foreign key prescription_id refrences prescription(id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createOrder = async(req,res) => {
     await checkTable();

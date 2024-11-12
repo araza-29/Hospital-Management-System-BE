@@ -8,7 +8,9 @@ const checkTable = async () => {
         name varchar(30) not null,
         phone_no varchar(30) not null,
         location varchar(100) not null,
-        foreign key (ambulance_id) refrences ambulance(id);`);
+        foreign key (ambulance_id) refrences ambulance(id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createAmbulanceBooking = async(req,res) => {
     await checkTable();

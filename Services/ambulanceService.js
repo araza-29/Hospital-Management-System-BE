@@ -6,7 +6,9 @@ const checkTable = async () => {
         id int AUTO_INCREMENT primary key,
         driver_id varchar(20) not null,
         location varchar(50) not null,
-        foreign key (driver_id) refrences driver(id);`);
+        foreign key (driver_id) refrences driver(id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createAmbulance = async(req,res) => {
     await checkTable();

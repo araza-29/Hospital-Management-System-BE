@@ -4,7 +4,9 @@ const checkTable = async () => {
     await connect.query(`Create Table if not exists prescription(
         id INT AUTO_INCREMENT primary key,
         appointment_id INT not null,
-        foreign key appointment_id refrences appointment(id));`);
+        foreign key appointment_id refrences appointment(id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createPrescription = async(req,res) => {
     await checkTable();

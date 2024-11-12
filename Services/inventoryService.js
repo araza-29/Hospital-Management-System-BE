@@ -4,7 +4,9 @@ const checkTable = async () => {
     await connect.query(`Create Table if not exists inventory(
         id INT AUTO_INCREMENT primary key,
         name Varchar(50) not null,
-        location INT not null);`);
+        location INT not null,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createInventory = async(req,res) => {
     await checkTable();

@@ -1,27 +1,28 @@
 const service = require("../Services/roleServices ")
 const createRoles = (req,res) => {
     const roleInfo = {
-        role: req.body.role
+        name: req.body.name
     }
-    service.createRoles(SpecialtyInfo,res)
+    service.createRoles(roleInfo,res)
 }
 const updateRoles = (req,res) => {
-    const SpecialtyInfo = {
-        role: req.body.role
+    const roleInfo = {
+        name: req.body.name,
+        roles_id: req.body.roles_id
     }
-    service.updateRoles(SpecialtyInfo,res)
+    service.updateRoles(roleInfo,res)
 }
 const deleteRoles = (req,res) => {
-    const SpecialtyInfo = {
-        role: req.body.role
+    const roleInfo = {
+        roles_id: req.body.roles_id
     }
-    service.deleteRoles(SpecialtyInfo,res)
+    service.deleteRoles(roleInfo,res)
 }
 const reviewRoles = (req,res) => {
-    const SpecialtyInfo = {
-        role: req.body.role
+    const roleInfo = {
+        roles_id: req.body.roles_id
     }
-    service.reviewRoles(SpecialtyInfo,res)
+    service.reviewRoles(roleInfo,res)
 }
 
 module.exports = {

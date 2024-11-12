@@ -8,7 +8,9 @@ const checkTable = async () => {
         doctor_id varchar(20) not null,
         time int not null constraint check_age check(age>=0),
         foreign key (user_id) refrences user(id),
-        foreign key (doctor_id) refrences doctor(id));`);
+        foreign key (doctor_id) refrences doctor(id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createAppointment = async(req,res) => {
     await checkTable();
@@ -72,6 +74,7 @@ const reviewAppointmentByDoctorID = (req,res) => {
         return res.status(200).send(results)
     })
 }
+
 
 module.exports = {
   createAppointment,

@@ -1,38 +1,38 @@
 const service = require("../Services/doctorServices")
 const createDoctor = (req,res) => {
-    const SpecialtyInfo = {
+    const DoctorInfo = {
         user_id: req.body.user_id,
         qualification: req.body.qualification,
         experince: req.body.experince
     }
-    service.createDoctor(SpecialtyInfo,res)
+    service.createDoctor(DoctorInfo,res)
 }
 const updateDoctor = (req,res) => {
-    const SpecialtyInfo = {
+    const DoctorInfo = {
         user_id: req.body.user_id,
         qualification: req.body.qualification,
         experince: req.body.experince
     }
-    service.updateSpecialty(SpecialtyInfo,res)
+    service.updateDoctor(DoctorInfo,res)
 }
 const deleteDoctor = (req,res) => {
-    const SpecialtyInfo = {
+    const DoctorInfo = {
         user_id: req.body.user_id
     }
-    service.deleteSpecialty(SpecialtyInfo,res)
+    service.deleteDoctor(DoctorInfo,res)
 }
 const reviewDoctor = (req,res) => {
-    const SpecialtyInfo = {
+    const DoctorInfo = {
         user_id: req.body.user_id
     }
-    service.reviewSpecialty(SpecialtyInfo,res)
+    service.reviewDoctor(DoctorInfo,res)
 }
 
-const reviewDoctorBySpecialty = (req,res) => {
-    const SpecialtyInfo = {
-        specialty_name: req.body.specialty_name
+const reviewDoctorByDoctor = (req,res) => {
+    const DoctorInfo = {
+        Doctor_name: req.body.Doctor_name
     }
-    service.reviewSpecialtyBySpecialty(SpecialtyInfo,res)
+    service.reviewDoctorByDoctor(DoctorInfo,res)
 }
 
 module.exports = {
@@ -40,5 +40,5 @@ module.exports = {
     updateDoctor,
     deleteDoctor,
     reviewDoctor,
-    reviewDoctorBySpecialty
+    reviewDoctorByDoctor
 }

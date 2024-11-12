@@ -7,7 +7,9 @@ const checkTable = async () => {
         medicine_id INT,
         test_id INT,
         foreign key prescription_id refrences prescription(id),
-        foreign key medicine_id refrences medicine(id));`);
+        foreign key medicine_id refrences medicine(id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createPrescriptionDetail = async(req,res) => {
     await checkTable();

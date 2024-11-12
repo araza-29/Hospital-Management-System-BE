@@ -1,28 +1,17 @@
     const service = require("../Services/appointmentService")
     const createAppointment = (req,res) => {
         const AppointmentInfo = {
-            first_name: req.body.user_fname,
-            last_name: req.body.user_lname,
-            age: req.body.user_age,
-            email: req.body.user_email,
-            phone: req.body.user_phone,
-            address: req.body.user_address,
-            gender: req.body.user_gender,
-            role_id: req.body.user_role_id
+            user_id: req.body.user_id,
+            doctor_id: req.body.doctor_id,
+            time: req.body.time
         }
         service.createAppointment(AppointmentInfo,res)
     }
     const updateAppointment = (req,res) => {
         const AppointmentInfo = {
-            first_name: req.body.user_fname,
-            last_name: req.body.user_lname,
-            age: req.body.user_age,
-            email: req.body.user_email,
-            phone: req.body.user_phone,
-            address: req.body.user_address,
-            gender: req.body.user_gender,
-            role_id: req.body.user_role_id,
-            appointment_id: req.body.appointment_id
+            user_id: req.body.user_id,
+            doctor_id: req.body.doctor_id,
+            time: req.body.time
         }
         service.updateAppointment(AppointmentInfo,res)
     }

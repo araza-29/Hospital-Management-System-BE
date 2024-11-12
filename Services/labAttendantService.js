@@ -4,7 +4,9 @@ const checkTable = async () => {
     await connect.query(`Create Table if not exists lab_attendant(
         user_id INT primary key,
         experince Varchar(30),
-        foriegn key (user_id) refrences user(id));`);
+        foriegn key (user_id) refrences user(id),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createlabAttendant = async(req,res) => {
     await checkTable();
