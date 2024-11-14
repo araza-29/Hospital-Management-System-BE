@@ -23,10 +23,22 @@ const createUser = async(req,res) => {
     pool.query(`Insert into user(first_name,last_name,age,email,password,gender,address,phone,role_id) values(?,?,?,?,?,?,?,?,?)`,[req.first_name,req.last_name,req.age,req.email,req.password,req.gender,req.address,req.phone,req.role_id],
     (error,results)=> {
         if(error){
-            res.json({code: 200, data:error})
+            res.json({code: 500, data:error})
         }
-        return res.json({code: 200, data: []})
-    })
+        else if (req.role_id === 2) {
+            // Fetch the last inserted ID
+            pool.query(`SELECT id from user where email = ? and role_id = ?`,[req.email,req.role_id], (error, result) => {
+                if (error) {
+                    return res.json({ code: 500, data: error });
+                }
+                // Return the user_id in the response
+                return res.json({ code: 200, data: result });
+            });
+        }
+        else {
+            return res.json({code: 200, data: []})
+        }
+})
 }
 const updateUser = async(req,res) => {
     await checkTable();

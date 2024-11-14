@@ -17,7 +17,8 @@ const createSpecialty = async(req,res) => {
         return res.status(200).send(results)
     })
 }
-const updateSpecialty = (req,res) => {
+const updateSpecialty = async(req,res) => {
+    await checkTable();
     pool.query(`Update Specialty set name = ? where id=?`,[req.Specialty_name,req.Specialty_id],
     (error,results)=> {
         if(error){
@@ -26,8 +27,8 @@ const updateSpecialty = (req,res) => {
         return res.status(200).send(results)
     })
 }
-const deleteSpecialty = (req,res) => {
-    checkTable();
+const deleteSpecialty = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from Specialty where id = ?`,[req.Specialty_id],
     (error,results)=> {
         if(error){
@@ -36,8 +37,8 @@ const deleteSpecialty = (req,res) => {
         return res.status(200).send(results)
     })
 }
-const reviewSpecialty = (req,res) => {
-    checkTable();
+const reviewSpecialty = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from Specialty where id=?`,[req.Specialty_id],
     (error,results)=> {
         if(error){

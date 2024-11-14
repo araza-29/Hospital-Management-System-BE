@@ -6,15 +6,13 @@ const checkTable = async () => {
         user_id int primary key,
         qualification varchar(20) not null,
         experince int not null,
-        specialty_id int not null,
-        foriegn key (specialty_id) refrences user(id),
-        foreign key (user_id) refrences user(id),
+        foreign key (user_id) references user(id),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createDoctor = async(req,res) => {
     await checkTable();
-    pool.query(`Insert into doctor(user_id,qualification,experince,specialty_id) values(?,?,?,?)`,[req.user_id,req.qualification,req.experince,req.specialty_id],
+    pool.query(`Insert into doctor(user_id,qualification,experince) values(?,?,?)`,[req.user_id,req.qualification,req.experince],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -23,7 +21,7 @@ const createDoctor = async(req,res) => {
     })
 }
 const updateDoctor = (req,res) => {
-    pool.query(`Update user set qualification = ?, experince = ?, specialty_id = ? where user_id=?`,[req.qualification,req.experince,req.specialty_id,req.user_id],
+    pool.query(`Update user set qualification = ?, experince = ? where user_id=?`,[req.qualification,req.experince,req.user_id],
     (error,results)=> {
         if(error){
             res.status(500).send(error)
@@ -51,7 +49,7 @@ const reviewDoctor = (req,res) => {
         return res.status(200).send(results)
     })
 }
-const reviewDoctorBySpecialty = (req,res) => {
+/*const reviewDoctorBySpecialty = (req,res) => {
     checkTable();
     pool.query(`Select * from doctor d join specialty s on d.specialty_id=s.id where s.name = ?`,[req.specialty_name],
     (error,results)=> {
@@ -60,12 +58,11 @@ const reviewDoctorBySpecialty = (req,res) => {
         }
         return res.status(200).send(results)
     })
-}
+}*/
 
 module.exports = {
   createDoctor,
   updateDoctor,
   reviewDoctor,
-  deleteDoctor,
-  reviewDoctorBySpecialty
+  deleteDoctor
 }

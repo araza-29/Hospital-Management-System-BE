@@ -1,4 +1,4 @@
-const service = require("../Services/AmbulanceBookingBookingService")
+const service = require("../Services/AmbulanceBookingService")
 const createAmbulanceBooking = (req,res) => {
     const AmbulanceBookingInfo = {
         ambulance_id: req.body.ambulance_id,
