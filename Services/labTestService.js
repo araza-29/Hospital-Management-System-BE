@@ -13,38 +13,38 @@ const createlabTest = async(req,res) => {
     pool.query(`Insert into lab_test(name,price) values(?,?)`,[req.name, req.price],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updatelabTest = (req,res) => {
+const updatelabTest = async(req,res) => {
     pool.query(`Update lab_test set name = ?, price = ? where id=?`,[req.name,req.price],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deletelabTest = (req,res) => {
-    checkTable();
+const deletelabTest = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from lab_test where id = ?`,[req.test_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewlabTest = (req,res) => {
-    checkTable();
+const reviewlabTest = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from lab_test where id=?`,[req.test_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

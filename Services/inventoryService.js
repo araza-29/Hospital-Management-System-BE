@@ -13,38 +13,39 @@ const createInventory = async(req,res) => {
     pool.query(`Insert into inventory(name,location) values(?,?)`,[req.inventory_name, req.inventory_location],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateInventory = (req,res) => {
+const updateInventory = async(req,res) => {
+    await checkTable();
     pool.query(`Update inventory set name = ?, location = ? where id=?`,[req.inventory_name, req.inventory_location, req.inventory_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteInventory = (req,res) => {
-    checkTable();
+const deleteInventory = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from inventory where id = ?`,[req.inventory_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewInventory = (req,res) => {
-    checkTable();
+const reviewInventory = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from inventory where id=?`,[req.inventory_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

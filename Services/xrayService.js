@@ -13,38 +13,39 @@ const createXRay = async(req,res) => {
     pool.query(`Insert into x_ray(name,price) values(?,?)`,[req.name, req.price],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateXRay = (req,res) => {
+const updateXRay = async(req,res) => {
+    await checkTable();
     pool.query(`Update x_ray set name = ?, price = ? where id=?`,[req.name,req.price],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteXRay = (req,res) => {
-    checkTable();
+const deleteXRay = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from x_ray where id = ?`,[req.test_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewXRay = (req,res) => {
-    checkTable();
+const reviewXRay = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from x_ray where id=?`,[req.test_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

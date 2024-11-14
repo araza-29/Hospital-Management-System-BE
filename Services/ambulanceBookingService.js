@@ -19,50 +19,50 @@ const createAmbulanceBooking = async(req,res) => {
     pool.query(`Insert into AmbulanceBooking(ambulance_id,name,phone_no,location,emergency_type,hospital) values(?,?,?,?,?)`,[req.ambulance_id,req.user_name,req.phone_no,req.location,req.emergency_type,req.hospital],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateAmbulanceBooking = (req,res) => {
-    checkTable();
+const updateAmbulanceBooking = async(req,res) => {
+    await checkTable();
     pool.query(`Update AmbulanceBooking set ambulance_id = ?,name = ?, phone_no = ?, location = ? hospital = ? emergency_type = ? where id=?`,[req.ambulance_id,req.user_name,req.phone_no,req.location,req.emergency_type,req.hospital, req.AmbulanceBooking_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteAmbulanceBooking = (req,res) => {
-    checkTable();
+const deleteAmbulanceBooking = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from AmbulanceBooking where id = ?`,[req.AmbulanceBooking_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewAmbulanceBooking = (req,res) => {
-    checkTable();
+const reviewAmbulanceBooking = async(req,res) => {
+    await checkTable();
     pool.query(`Select from AmbulanceBooking where id=?`,[req.AmbulanceBooking_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 
-const reviewAmbulanceBookingByPhoneNo = (req,res) => {
-    checkTable();
+const reviewAmbulanceBookingByPhoneNo = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from AmbulanceBooking where phone_no = ?`,[req.phone_no],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

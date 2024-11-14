@@ -16,38 +16,39 @@ const createOrderDetail = async(req,res) => {
     pool.query(`Insert into orderDetail(order_id,medicine_id,test_id) values(?,?,?)`,[req.order_id, req.medicine_id,req.test_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateOrderDetail = (req,res) => {
+const updateOrderDetail = async(req,res) => {
+    await checkTable();
     pool.query(`Update orderDetail set prsecription_id = ?, medicine_id = ?, test_id = ? where id=?`,[req.order_id, req.medicine_id, req.test_id, req.orderDetail_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteOrderDetail = (req,res) => {
-    checkTable();
+const deleteOrderDetail = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from orderDetail where id = ?`,[req.orderDetail_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewOrderDetailByAppointmentID = (req,res) => {
-    checkTable();
+const reviewOrderDetailByAppointmentID = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from orderDetail d join order o on d.order_id = o.id join prescription p on o.precription_id = p.id join appointment a on p.appointment_id = ?`,[req.appointment_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

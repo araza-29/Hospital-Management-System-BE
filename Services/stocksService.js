@@ -16,38 +16,39 @@ const createStock = async(req,res) => {
     pool.query(`Insert into stocks(inventory_id,medicine_id,stock) values(?,?,?)`,[req.inventory_id, req.medicine_id, req.medicine_stock],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateStock = (req,res) => {
+const updateStock = async(req,res) => {
+    await checkTable();
     pool.query(`Update stock set inventory_id = ?, medicine_id = ?, stock = ? where id=?`,[req.inventory_id, req.medicine_id, req.stock,req.stock_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteStock = (req,res) => {
-    checkTable();
+const deleteStock = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from stock where id = ?`,[req.stock_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewStock = (req,res) => {
-    checkTable();
+const reviewStock = async(req,res) => {
+    await checkTable();
     pool.query(`Select m.name, m.dose from stock s join medicine m on s.medicine_id = m.id where stock = 0`,
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

@@ -17,38 +17,39 @@ const createReports = async(req,res) => {
     pool.query(`Insert into reports(user_id,attendant_id,test_id) values(?,?,?)`,[req.user_id, req.attendant_id, req.test_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateReports = (req,res) => {
+const updateReports = async(req,res) => {
+    await checkTable();
     pool.query(`Update reports set user_id = ?, attendant_id = ?, test_id where id=?`,[req.user_id,req.attendant_id, req.test_id, req.report_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteReports = (req,res) => {
-    checkTable();
+const deleteReports = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from reports where id = ?`,[req.report_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewReports = (req,res) => {
-    checkTable();
+const reviewReports = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from reports where id=?`,[req.report_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

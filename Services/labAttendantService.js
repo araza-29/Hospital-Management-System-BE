@@ -13,38 +13,39 @@ const createlabAttendant = async(req,res) => {
     pool.query(`Insert into lab_attendant(user_id,experince) values(?,?)`,[req.user_id, req.experince],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updatelabAttendant = (req,res) => {
+const updatelabAttendant = async(req,res) => {
+    await checkTable();
     pool.query(`Update lab_attendant set exerpince = ? where id=?`,[req.experince,req.Specialty_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deletelabAttendant = (req,res) => {
-    checkTable();
+const deletelabAttendant = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from lab_attendant where id = ?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewlabAttendant = (req,res) => {
-    checkTable();
+const reviewlabAttendant = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from lab_attendant where id=?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

@@ -45,9 +45,9 @@ const updateUser = async(req,res) => {
     pool.query(`Update user set first_name = ?, last_name = ?, age = ?, email= ? , password = ?, gender = ?, address = ?, phone = ?, role_id = ? where id=?`,[req.first_name,req.last_name,req.age,req.email,req.gender,req.address,req.phone,req.role_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 const deleteUser = async(req,res) => {
@@ -55,9 +55,9 @@ const deleteUser = async(req,res) => {
     pool.query(`Delete from user where id = ?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 const reviewUser = async(req,res) => {
@@ -65,9 +65,9 @@ const reviewUser = async(req,res) => {
     pool.query(`Select * from user where id=?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.json({code:200, data:results})
+        return res.json({code: 200, data:results})
     })
 }
 const Login = async(req,res) => {
@@ -75,9 +75,9 @@ const Login = async(req,res) => {
     pool.query(`Select id from user where email = ? and password = ? and role_id = ?`,[req.email, req.password,req.role_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.json({code: 200, data: results})
+        return res.json({code: 200, data:results})
     })
 }
 

@@ -15,38 +15,39 @@ const createOrder = async(req,res) => {
     pool.query(`Insert into order(prescription_id,delivery_time,price) values(?,?,?)`,[req.prescription_id,req.delivery_time,req.price],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateOrder = (req,res) => {
+const updateOrder = async(req,res) => {
+    await checkTable();
     pool.query(`Update order set prescription_id = ?, delivery_time = ?, price = ? where id=?`,[req.prescription_id, req.delivery_time, req.time, req.order_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteOrder = (req,res) => {
-    checkTable();
+const deleteOrder = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from order where id = ?`,[req.order_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewOrderByUserID = (req,res) => {
-    checkTable();
+const reviewOrderByUserID = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from order o join prescription p on o.prescription_id = p.id join where p.user_id = ?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

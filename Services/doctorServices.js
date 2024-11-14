@@ -15,38 +15,39 @@ const createDoctor = async(req,res) => {
     pool.query(`Insert into doctor(user_id,qualification,experince) values(?,?,?)`,[req.user_id,req.qualification,req.experince],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateDoctor = (req,res) => {
+const updateDoctor = async(req,res) => {
+    await checkTable();
     pool.query(`Update user set qualification = ?, experince = ? where user_id=?`,[req.qualification,req.experince,req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteDoctor = (req,res) => {
-    checkTable();
+const deleteDoctor = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from doctor where user_id = ?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewDoctor = (req,res) => {
-    checkTable();
+const reviewDoctor = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from doctor where user_id=?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 /*const reviewDoctorBySpecialty = (req,res) => {

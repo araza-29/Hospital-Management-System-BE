@@ -13,9 +13,9 @@ const createRoles = async(req,res) => {
     pool.query(`Insert into roles(name) values(?)`,[req.name],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 const updateRoles = async(req,res) => {
@@ -23,9 +23,9 @@ const updateRoles = async(req,res) => {
     pool.query(`Update roles set name = ? where id=?`,[req.name,req.roles_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 const deleteRoles = async(req,res) => {
@@ -33,9 +33,9 @@ const deleteRoles = async(req,res) => {
     pool.query(`Delete from roles where id = ?`,[req.roles_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 const reviewRoles = async(req,res) => {
@@ -43,9 +43,9 @@ const reviewRoles = async(req,res) => {
     pool.query(`Select * from roles where id=?`,[req.roles_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

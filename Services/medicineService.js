@@ -14,38 +14,39 @@ const createMedicine = async(req,res) => {
     pool.query(`Insert into medicine(name,price,dose) values(?,?,?)`,[req.medicine_name, req.medicine_price, req.medicine_dose],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateMedicine = (req,res) => {
+const updateMedicine = async(req,res) => {
+    await checkTable();
     pool.query(`Update medicine set name = ?, price = ?, dose = ? where id=?`,[req.medicine_name, req.medicine_price, req.medicine_dose, req.medicine_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteMedicine = (req,res) => {
-    checkTable();
+const deleteMedicine = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from medicine where id = ?`,[req.medicine_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewMedicine = (req,res) => {
-    checkTable();
+const reviewMedicine = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from medicine where name=? and dose =?`,[req.medicine_name,req.medicine_dose],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

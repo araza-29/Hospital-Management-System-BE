@@ -17,39 +17,39 @@ const createAppointment = async(req,res) => {
     pool.query(`Insert into appointment(user_id,doctor_id,time) values(?,?,?)`,[req.user_id,req.doctor_id,req.time],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateAppointment = (req,res) => {
-    checkTable();
+const updateAppointment = async(req,res) => {
+    await checkTable();
     pool.query(`Update appointment set user_id = ?, doctor_id = ?, time = ? where id=?`,[req.user_id,req.doctor_id,req.time,req.appointment_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteAppointment = (req,res) => {
-    checkTable();
+const deleteAppointment = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from appointment where id = ?`,[req.appointment_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewAppointment = (req,res) => {
-    checkTable();
+const reviewAppointment = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from appointment where id=?`,[req.appointment_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 
@@ -58,9 +58,9 @@ const reviewAppointmentByUserID = (req,res) => {
     pool.query(`Select * from appointment where user_id=?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 
@@ -69,9 +69,9 @@ const reviewAppointmentByDoctorID = (req,res) => {
     pool.query(`Select * from appointment where doctor_id=?`,[req.doctor_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

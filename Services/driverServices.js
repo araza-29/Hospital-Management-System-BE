@@ -14,38 +14,39 @@ const createDriver = async(req,res) => {
     pool.query(`Insert into driver(user_id,experince) values(?,?)`,[req.user_id,req.experince],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const updateDriver = (req,res) => {
+const updateDriver = async(req,res) => {
+    await checkTable();
     pool.query(`Update driver set experince = ? where user_id=?`,[req.experince, req.user_id,],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const deleteDriver = (req,res) => {
-    checkTable();
+const deleteDriver = async(req,res) => {
+    await checkTable();
     pool.query(`Delete from driver where user_id = ?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
-const reviewDriver = (req,res) => {
-    checkTable();
+const reviewDriver = async(req,res) => {
+    await checkTable();
     pool.query(`Select * from driver where user_id=?`,[req.user_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 

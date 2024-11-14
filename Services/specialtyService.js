@@ -12,9 +12,9 @@ const createSpecialty = async(req,res) => {
     pool.query(`Insert into Specialty(name) values(?)`,[req.Specialty_name],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 const updateSpecialty = async(req,res) => {
@@ -22,9 +22,9 @@ const updateSpecialty = async(req,res) => {
     pool.query(`Update Specialty set name = ? where id=?`,[req.Specialty_name,req.Specialty_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 const deleteSpecialty = async(req,res) => {
@@ -32,9 +32,9 @@ const deleteSpecialty = async(req,res) => {
     pool.query(`Delete from Specialty where id = ?`,[req.Specialty_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 const reviewSpecialty = async(req,res) => {
@@ -42,9 +42,9 @@ const reviewSpecialty = async(req,res) => {
     pool.query(`Select * from Specialty where id=?`,[req.Specialty_id],
     (error,results)=> {
         if(error){
-            res.status(500).send(error)
+            return res.json({code: 500, data:[]})
         }
-        return res.status(200).send(results)
+        return res.json({code: 200, data:results})
     })
 }
 
