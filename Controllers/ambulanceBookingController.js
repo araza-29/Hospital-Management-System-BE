@@ -1,10 +1,14 @@
-const service = require("../Services/AmbulanceBookingService")
+const service = require("../Services/ambulanceBookingService")
 const createAmbulanceBooking = (req,res) => {
     const AmbulanceBookingInfo = {
         ambulance_id: req.body.ambulance_id,
         name: req.body.name,
         phone_no: req.body.phone_no,
-        location: req.body.location
+        city: req.body.city,
+        area: req.body.area,
+        address: req.body.Address,
+        condition: req.body.condition,
+        hospital: req.body.hospital,
     }
     service.createAmbulanceBooking(AmbulanceBookingInfo,res)
 }
@@ -13,7 +17,11 @@ const updateAmbulanceBooking = (req,res) => {
         ambulance_id: req.body.ambulance_id,
         name: req.body.name,
         phone_no: req.body.phone_no,
-        location: req.body.location
+        city: req.body.city,
+        area: req.body.area,
+        address: req.body.Address,
+        condition: req.body.condition,
+        hospital: req.body.hospital,
     }
     service.updateAmbulanceBooking(AmbulanceBookingInfo,res)
 }

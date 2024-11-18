@@ -2,14 +2,15 @@ const service = require("../Services/ambulanceService")
 const createAmbulance = (req,res) => {
     const AmbulanceInfo = {
         driver_id: req.body.driver_id,
-        location: req.body.location
+        city: req.body.city,
+        area: req.body.area
     }
     service.createAmbulance(AmbulanceInfo,res)
 }
 const updateAmbulance = (req,res) => {
     const AmbulanceInfo = {
-        driver_id: req.body.driver_id,
-        location: req.body.location
+        ambulance_id: req.body.ambulance_id,
+        booked: req.body.booked
     }
     service.updateAmbulance(AmbulanceInfo,res)
 }

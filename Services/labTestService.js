@@ -5,12 +5,13 @@ const checkTable = async () => {
         id INT primary key,
         name Varchar(50),
         price int not null,
+        Sample Varchar(50),
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP);`);
 }
 const createlabTest = async(req,res) => {
     await checkTable();
-    pool.query(`Insert into lab_test(name,price) values(?,?)`,[req.name, req.price],
+    pool.query(`Insert into lab_test(name,price,sample) values(?,?,?)`,[req.name, req.price, req.sample],
     (error,results)=> {
         if(error){
             return res.json({code: 500, data:[]})
@@ -19,7 +20,7 @@ const createlabTest = async(req,res) => {
     })
 }
 const updatelabTest = async(req,res) => {
-    pool.query(`Update lab_test set name = ?, price = ? where id=?`,[req.name,req.price],
+    pool.query(`Update lab_test set name = ?, price = ? sample = ? where id=?`,[req.name,req.price, req.sample],
     (error,results)=> {
         if(error){
             return res.json({code: 500, data:[]})

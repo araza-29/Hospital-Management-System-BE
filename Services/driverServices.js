@@ -1,7 +1,7 @@
 const pool = require("../Config/dbconfig")
 const connect = require("../Config/dbconfig")
 const checkTable = async () => {
-    await connect.query(`
+    connect.query(`
     Create Table if not exists driver(
         user_id int primary key,
         experince int not null,
@@ -14,7 +14,7 @@ const createDriver = async(req,res) => {
     pool.query(`Insert into driver(user_id,experince) values(?,?)`,[req.user_id,req.experince],
     (error,results)=> {
         if(error){
-            return res.json({code: 500, data:[]})
+            return res.json({code: 500, data:error})
         }
         return res.json({code: 200, data:results})
     })
@@ -24,7 +24,7 @@ const updateDriver = async(req,res) => {
     pool.query(`Update driver set experince = ? where user_id=?`,[req.experince, req.user_id,],
     (error,results)=> {
         if(error){
-            return res.json({code: 500, data:[]})
+            return res.json({code: 500, data:error})
         }
         return res.json({code: 200, data:results})
     })
@@ -34,7 +34,7 @@ const deleteDriver = async(req,res) => {
     pool.query(`Delete from driver where user_id = ?`,[req.user_id],
     (error,results)=> {
         if(error){
-            return res.json({code: 500, data:[]})
+            return res.json({code: 500, data:error})
         }
         return res.json({code: 200, data:results})
     })
@@ -44,7 +44,7 @@ const reviewDriver = async(req,res) => {
     pool.query(`Select * from driver where user_id=?`,[req.user_id],
     (error,results)=> {
         if(error){
-            return res.json({code: 500, data:[]})
+            return res.json({code: 500, data:error})
         }
         return res.json({code: 200, data:results})
     })
