@@ -3,7 +3,10 @@ const createDoctor = (req,res) => {
     const DoctorInfo = {
         user_id: req.body.user_id,
         qualification: req.body.qualification,
-        experince: req.body.experince
+        experince: req.body.experince,
+        speciality_id: req.body.speciality_id,
+        start_time: req.body.start_time,
+        end_time: req.body.end_time
     }
     service.createDoctor(DoctorInfo,res)
 }
@@ -11,7 +14,10 @@ const updateDoctor = (req,res) => {
     const DoctorInfo = {
         user_id: req.body.user_id,
         qualification: req.body.qualification,
-        experince: req.body.experince
+        experince: req.body.experince,
+        speciality_id: req.body.speicality_id,
+        start_time: req.body.start_time,
+        end_time: req.body.end_time
     }
     service.updateDoctor(DoctorInfo,res)
 }
@@ -35,10 +41,17 @@ const reviewDoctorByDoctorName = (req,res) => {
     service.reviewDoctorByDoctor(DoctorInfo,res)
 }
 
+const reviewDoctorbySpeciality = (req,res) => {
+    const DoctorInfo = {
+        speciality_name: req.body.speciality_name
+    }
+    service.reviewDoctorBySpecialty(DoctorInfo,res);
+}
 module.exports = {
     createDoctor,
     updateDoctor,
     deleteDoctor,
     reviewDoctor,
-    reviewDoctorByDoctorName
+    reviewDoctorByDoctorName,
+    reviewDoctorbySpeciality
 }

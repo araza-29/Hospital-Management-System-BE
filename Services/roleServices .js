@@ -13,7 +13,7 @@ const createRoles = async(req,res) => {
     pool.query(`Insert into roles(name) values(?)`,[req.name],
     (error,results)=> {
         if(error){
-            return res.json({code: 500, data:[]})
+            return res.json({code: 500, data:error})
         }
         return res.json({code: 200, data:results})
     })

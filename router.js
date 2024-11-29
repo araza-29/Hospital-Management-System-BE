@@ -1,4 +1,4 @@
-const Specialtycontroller = require("./Controllers/SpecialtyController")
+const Specialitycontroller = require("./Controllers/specialityController")
 const rolescontroller = require("./Controllers/rolesController")
 const usercontroller = require("./Controllers/userController")
 const appointmentController = require("./Controllers/appointmentController")
@@ -16,14 +16,16 @@ const prescriptionController = require("./Controllers/prescriptionController")
 const prescriptionDetailsController = require("./Controllers/prescriptionDetailsController")
 const reportsController = require("./Controllers/reportsController")
 const stocksController = require("./Controllers/stocksController")
-
+const urinalysisController = require("./Services/urinalysisService")
+const clottingController = require("./Services/clottingService")
+const bloodCountController = require("./Services/completeBloodCountService")
 const router = require("express").Router()
 
-//Specialty
-router.post("/CreateSpecialty",Specialtycontroller.createSpecialty)
-router.post("/UpdateSpecialty",Specialtycontroller.updateSpecialty)
-router.post("/ReviewSpecialty",Specialtycontroller.reviewSpecialty)
-router.post("/DeleteSpecialty",Specialtycontroller.deleteSpecialty)
+//Speciality
+router.post("/CreateSpeciality",Specialitycontroller.createSpeciality)
+router.post("/UpdateSpeciality",Specialitycontroller.updateSpeciality)
+router.post("/ReviewSpeciality",Specialitycontroller.reviewSpeciality)
+router.post("/DeleteSpeciality",Specialitycontroller.deleteSpeciality)
 
 //User
 router.post("/CreateUser",usercontroller.createUser)
@@ -64,6 +66,7 @@ router.post("/CreateDoctor",doctorController.createDoctor)
 router.post("/UpdateDoctor",doctorController.updateDoctor)
 router.post("/ReviewDoctor",doctorController.reviewDoctor)
 router.post("/ReviewDoctorByDictor",doctorController.reviewDoctorByDoctorName)
+router.post("/ReviewDoctorBySpeciality",doctorController.reviewDoctorbySpeciality)
 router.post("/DeleteDoctor",doctorController.deleteDoctor)
 
 //Driver
@@ -88,7 +91,10 @@ router.post("/DeleteLabAttendant",labAttendantController.deletelabAttendant)
 router.post("/CreateLabTest",labTestController.createlabTest)
 router.post("/UpdateLabTest",labTestController.updatelabTest)
 router.post("/ReviewLabTest",labTestController.reviewlabTest)
+router.post("/ReviewLabTestByUserId",labTestController.reviewlabTestByUserId)
+router.post("/ReviewLabTestByAttendantId",labTestController.reviewlabTestByAttendantId)
 router.post("/UpdateLabTest",labTestController.updatelabTest)
+router.post("/ReviewLabTestUniquely",labTestController.reviewlabTestsUniquely)
 
 //Medicine
 router.post("/CreateMedicine",medicineController.createMedicine)
@@ -132,5 +138,23 @@ router.post("/CreateStocks",stocksController.createStock)
 router.post("/UpdateStocks",stocksController.updateStock)
 router.post("/ReviewStocks",stocksController.reviewStock)
 router.post("/DeleteStocks",stocksController.deleteStock)
+
+//Urinalysis
+router.post("/CreateUrinalysis",urinalysisController.createUrinalysis)
+router.post("/DeleteUrinalysis",urinalysisController.deleteUrinalysis)
+router.post("/ReviewUrinalysis",urinalysisController.reviewUrinalysis)
+router.post("/UpdateUrinalysis",urinalysisController.updateUrinalysis)
+
+//Clotting
+router.post("/CreateClotting",clottingController.createClotting)
+router.post("/DeleteClotting",clottingController.deleteClotting)
+router.post("/ReviewClotting",clottingController.reviewClotting)
+router.post("/UpdateClotting",clottingController.updateClotting)
+
+//Blood count
+router.post("/CreateBloodCount",bloodCountController.createBloodCount)
+router.post("/DeleteBloodCount",bloodCountController.deleteBloodCount)
+router.post("/ReviewBloodCount",bloodCountController.reviewBloodCount)
+router.post("/UpdateBloodCount",bloodCountController.updateBloodCount)
 
 module.exports = router

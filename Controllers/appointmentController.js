@@ -3,7 +3,9 @@
         const AppointmentInfo = {
             user_id: req.body.user_id,
             doctor_id: req.body.doctor_id,
-            time: req.body.time
+            startTime: req.body.startTime,
+            endTime: req.body.endTime,
+            date: req.body.date
         }
         service.createAppointment(AppointmentInfo,res)
     }
@@ -11,7 +13,10 @@
         const AppointmentInfo = {
             user_id: req.body.user_id,
             doctor_id: req.body.doctor_id,
-            time: req.body.time
+            startTime: req.body.startTime,
+            endTime: req.body.endTime,
+            date: req.body.date,
+            appointment_id: req.body.appointment_id
         }
         service.updateAppointment(AppointmentInfo,res)
     }
@@ -31,13 +36,13 @@
         const AppointmentInfo = {
             user_id: req.body.user_id
         }
-        service.reviewAppointment(AppointmentInfo,res)
+        service.reviewAppointmentByUserID(AppointmentInfo,res)
     }
     const reviewAppointmentByDoctorID = (req,res) => {
         const AppointmentInfo = {
             doctor_id: req.body.doctor_id
         }
-        service.reviewAppointment(AppointmentInfo,res)
+        service.reviewAppointmentByDoctorID(AppointmentInfo,res)
     }
     
 module.exports = {
