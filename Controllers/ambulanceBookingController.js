@@ -14,14 +14,8 @@ const createAmbulanceBooking = (req,res) => {
 }
 const updateAmbulanceBooking = (req,res) => {
     const AmbulanceBookingInfo = {
-        ambulance_id: req.body.ambulance_id,
-        name: req.body.name,
-        phone_no: req.body.phone_no,
-        city: req.body.city,
-        area: req.body.area,
-        address: req.body.Address,
-        condition: req.body.condition,
-        hospital: req.body.hospital,
+        status: req.body.status,
+        ambulanceBooking_id: req.body.ambulanceBooking_id,
     }
     service.updateAmbulanceBooking(AmbulanceBookingInfo,res)
 }
@@ -33,7 +27,7 @@ const deleteAmbulanceBooking = (req,res) => {
 }
 const reviewAmbulanceBooking = (req,res) => {
     const AmbulanceBookingInfo = {
-        AmbulanceBooking_id: req.body.AmbulanceBooking_id
+        driverId: req.body.driverId
     }
     service.reviewAmbulanceBooking(AmbulanceBookingInfo,res)
 }

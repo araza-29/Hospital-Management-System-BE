@@ -61,7 +61,7 @@ const reviewAppointmentByUserID = async(req,res) => {
     pool.query(`SELECT a.*, CONCAT(u.first_name, ' ', u.last_name) AS doctor_name FROM appointment a JOIN doctor d ON a.doctor_id = d.user_id JOIN USER u ON d.user_id = u.id WHERE a.user_id = ?;`,[req.user_id],
     (error,results)=> {
         if(error){
-            return res.json({code: 500, data:[]})
+            return res.json({code: 500, data:error})
         }
         console.log(results);
         return res.json({code: 200, data:results})
@@ -70,10 +70,10 @@ const reviewAppointmentByUserID = async(req,res) => {
 
 const reviewAppointmentByDoctorID = async(req,res) => {
     await checkTable();
-    pool.query(`Select * from appointment where doctor_id=? and aDate > Current_date;`,[req.doctor_id],
+    pool.query(`SELECT a.*, CONCAT(u.first_name, ' ', u.last_name) AS user_name FROM appointment a JOIN user u ON a.user_id = u.id WHERE a.doctor_id = ?;`,[req.doctor_id],
     (error,results)=> {
         if(error){
-            return res.json({code: 500, data:[]})
+            return res.json({code: 500, data:error})
         }
         return res.json({code: 200, data:results})
     })

@@ -55,10 +55,20 @@ const reviewAmbulance = async(req,res) => {
         return res.json({code: 200, data:results})
     })
 }
-
+const reviewAmbulanceInArea = async(req,res) => {
+    await checkTable();
+    pool.query(`SELECT * FROM ambulance WHERE city = ? and booked = false ORDER BY (area = ?) DESC LIMIT 1`,[req.city,req.area],
+    (error,results)=> {
+        if(error){
+            return res.json({code: 500, data:error})
+        }
+        return res.json({code: 200, data:results})
+    })
+}
 module.exports = {
   createAmbulance,
   updateAmbulance,
   reviewAmbulance,
-  deleteAmbulance
+  deleteAmbulance,
+  reviewAmbulanceInArea
 }

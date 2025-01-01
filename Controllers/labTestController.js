@@ -8,9 +8,6 @@ const createlabTest = (req,res) => {
         attendantId: req.body.attendantId,
         date: req.body.date,
         time: req.body.time,
-        address: req.body.address,
-        city: req.body.city,
-        area: req.body.area,
         status: req.body.status
     }
     service.createlabTest(labTestInfo,res)
@@ -24,11 +21,8 @@ const updatelabTest = (req,res) => {
         attendantId: req.body.attendantId,
         date: req.body.date,
         time: req.body.time,
-        address: req.body.address,
-        city: req.body.city,
-        area: req.body.area,
         status: req.body.status,
-        testId: req.bodytestId
+        testId: req.body.testId
     }
     service.updatelabTest(labTestInfo,res)
 }
@@ -57,7 +51,18 @@ const reviewlabTestByAttendantId = (req,res) => {
     service.reviewlabTestByAttendantId(labTestInfo,res);
 }
 const reviewlabTestsUniquely = (req,res) => {
-    service.reviewlabTestByAttendantId(req,res);
+    const labTestInfo = {
+        attendantId: req.body.attendantId
+    }
+    service.reviewlabTestByAttendantId(labTestInfo,res);
+}
+
+const reviewFreeAttendant = (req,res) => {
+    const labTestInfo = {
+        date: req.body.date,
+        time: req.body.time
+    }
+    service.reviewFreeAttendant(labTestInfo,res);
 }
 module.exports = {
     createlabTest,
@@ -66,5 +71,6 @@ module.exports = {
     reviewlabTest,
     reviewlabTestByUserId,
     reviewlabTestByAttendantId,
-    reviewlabTestsUniquely
+    reviewlabTestsUniquely,
+    reviewFreeAttendant
 }

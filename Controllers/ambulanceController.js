@@ -26,10 +26,17 @@ const reviewAmbulance = (req,res) => {
     }
     service.reviewAmbulance(AmbulanceInfo,res)
 }
-
+const reviewAmbulanceInArea = (req,res) => {
+    const AmbulanceInfo = {
+        city: req.body.city,
+        area: req.body.area
+    }
+    service.reviewAmbulanceInArea(AmbulanceInfo,res)
+}
 module.exports = {
     createAmbulance,
     updateAmbulance,
     deleteAmbulance,
-    reviewAmbulance
+    reviewAmbulance,
+    reviewAmbulanceInArea
 }
